@@ -30,12 +30,5 @@ router.post('/', function(req, res)
   }
 });
 
-// nadav and dor - implement:
-// take quizes from DB.
-//function GetQuizes()
-//{
-//  return [{id: 1, name: "animals"}, {id: 2, name: "techni"}, {id: 3, name: "ofek"}];
-//}
-
 module.exports = router;
 

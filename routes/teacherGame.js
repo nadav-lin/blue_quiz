@@ -9,24 +9,27 @@ var manager = require('./../BL/GameManager.js');
 // teacher press next question
 router.post('/', function(req, res)
 {
+    var operation = req.body.operation;
     var gameId = req.body.gameId;
-    var question = manager.GetNextQuestion(gameId);
 
-    if (question == null)
-        res.send("Game over")
-    else
-        res.send(question.question);
-});
-
-router.get('/', function(req, res)
-{
-    var gameId = req.body.gameId;
-    var question = manager.GetNextQuestion(gameId);
-
-    if (question == null)
-        res.send("Game over")
-    else
-        res.send(question.question);
+    switch (operation)
+    {
+        case("NextQuestion"):
+        {
+            manager.GetNextQuestion(gameId, res);
+            break;
+        }
+        case("EndQuestion"):
+        {
+            manager.EndQuestion(gameId, res);
+            break;
+        }
+        case("EndGame"):
+        {
+            manager.EndGame(gameId, res);
+            break;
+        }
+    }
 });
 
 module.exports = router;

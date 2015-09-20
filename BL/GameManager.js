@@ -20,28 +20,38 @@ exports.AddGame = function(chosenQuizId)
     return id;
 };
 
-exports.GetNextQuestion = function(gameId)
+exports.EndGame = function(gameId, res)
 {
-    var question = null;
-
     if(gameDic[gameId])
     {
-        question = gameDic[gameId].GetNextQuestion();
+        gameDic[gameId].EndGame(res);
+        //delete
     }
-
-    return question;
 };
 
-exports.GetCurrentQuestion = function(gameId, userCurrentQuestion) {
+exports.GetNextQuestion = function(gameId, res)
+{
+    if(gameDic[gameId])
+    {
+        gameDic[gameId].GetNextQuestion(res);
+    }
+};
+
+exports.GetCurrentQuestion = function(gameId, userCurrentQuestion, res)
+{
     if (gameDic[gameId])
     {
-        var question = gameDic[gameId].GetCurrentQuestion(userCurrentQuestion);
-        return question;
+        gameDic[gameId].GetCurrentQuestion(userCurrentQuestion, res);
     }
-
-    return null;
 };
 
+exports.EndQuestion = function(gameId, res)
+{
+    if (gameDic[gameId])
+    {
+        gameDic[gameId].EndQuestion(res);
+    }
+};
 
 exports.GetGames = function(chosenQuizId)
 {

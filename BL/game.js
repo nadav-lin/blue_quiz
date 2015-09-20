@@ -2,16 +2,6 @@
  * Created by user on 14/09/2015.
  */
 var mySql = require('./../DAL/mySql.js');
-//
-var question = function(question, op1, op2, op3, op4)
-{
-    this.question = question;
-    this.op1 = op1;
-    this.op2 = op2;
-    this.op3 = op3;
-    this.op4 = op4;
-    this.index = 1;
-};
 
 var Game = function(chosenQuizId)
 {
@@ -26,7 +16,23 @@ var Game = function(chosenQuizId)
         questions = result;
     }, chosenQuizId);
 
-    this.GetNextQuestion = function ()
+    this.EndQuestion = function (res)
+    {
+        var waitSignal = JSON.stringify({wait: "true"});
+        res.end(waitSignal);
+
+        Disturbute(waitSignal);
+    };
+
+    this.EndGame = function (res)
+    {
+        var gameOverSignal = JSON.stringify({over: "true"});
+
+        res.end(gameOverSignal);
+        Disturbute(gameOverSignal);
+    };
+
+    this.GetNextQuestion = function (res)
     {
         currentQuestionIndex++;
 
@@ -37,34 +43,66 @@ var Game = function(chosenQuizId)
 
         if(questions.length > currentQuestionIndex)
         {
-            return questions[currentQuestionIndex];
-        }
+            var question = questions[currentQuestionIndex];
+            question.index = currentQuestionIndex;
 
-        return null;
-    };
+            var questionJason = JSON.stringify(question);
+            res.end(questionJason);
 
-    this.GetCurrentQuestion = function (userCurrentQuestion)
-    {
-        // the user already has the current question
-        if (!isStarted || userCurrentQuestion == currentQuestionIndex)
-            return null;
-
-        var tempQuestion = null;
-
-        // if there is another question, give it to him
-        if(questions.length > currentQuestionIndex)
-        {
-            tempQuestion = questions[currentQuestionIndex];
+            Disturbute(questionJason);
         }
         else
         {
-            tempQuestion = new question("Game Over", "", "", "", "");
+            var gameOverSignal = JSON.stringify({over: "true"});
+
+            res.end(gameOverSignal);
+            Disturbute(gameOverSignal);
         }
+    };
 
-        if (tempQuestion != null)
-            tempQuestion.index = currentQuestionIndex;
+    function Disturbute(itemToSend)
+    {
+        var length = connections.length;
 
-        return tempQuestion;
+        for (var index = 0; index < length; ++index)
+        {
+            try
+            {
+                connections.pop().end(itemToSend);
+            }
+            catch (e)
+            {
+                console.log("FAILED! " + e.message);
+            }
+        }
+    }
+
+    this.GetCurrentQuestion = function (userCurrentQuestion, res)
+    {
+        // the user already has the current question
+        if (!isStarted || userCurrentQuestion == currentQuestionIndex)
+        {
+            connections.push(res);
+        }
+        else
+        {
+            var tempQuestion = null;
+
+            // if there is another question, give it to him
+            if (questions.length > currentQuestionIndex)
+            {
+                tempQuestion = questions[currentQuestionIndex];
+            }
+            else
+            {
+                tempQuestion = {question_desc: "Game Over"}
+            }
+
+            if (tempQuestion != null)
+                tempQuestion.index = currentQuestionIndex;
+
+            res.end(JSON.stringify(tempQuestion));
+        }
     };
 };
 

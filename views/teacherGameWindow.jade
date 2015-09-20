@@ -1,13 +1,16 @@
 //
-   Created by ôðéðä on 12/09/2015.
+   Created by פנינה on 12/09/2015.
 extends layout
 block content
    h1#mytitle Teacher game window
    br
    br
-   h2#currentQuestion
+   h2#currentQuestion guy
 
-   input#NextQuestion(type="button", value="Next Question")
+   input#NextQuestion(type="button", value="Next question")
+   input#EndQuestion(type="button", value="End question")
+   input#EndGame(type="button", value="End game")
+
    input#gameId(type="hidden", value=id)
 
    script(src="/javascripts/jquery.js")

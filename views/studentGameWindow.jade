@@ -1,28 +1,30 @@
 //
-   Created by ôðéðä on 12/09/2015.
-extends layout
-block content
-   h1#mytitle student Game
-
-   h1#question
-   br
-
-   input(type="radio", name="chosenAnswer", value=op1)
-   label#op1
-   br
-   input(type="radio", name="chosenAnswer", value=op2)
-   label#op2
-   br
-   input(type="radio", name="chosenAnswer", value=op3)
-   label#op3
-   br
-   input(type="radio", name="chosenAnswer", value=op4)
-   label#op4
-   br
-   br
-
-   input#gameId(type="hidden", value=id)
-   input#currentQuestion(type="hidden", value=-1)
-
-   script(src="/javascripts/jquery.js")
-   script(src="/javascripts/studentGameScripts.js")
+   Created by ×¤× ×™× ×” on 12/09/2015.
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title= title
+        script(src = "/javascripts/jquery.js")
+        script(src="/javascripts/studentGameScripts.js")
+    body(bgcolor='black')
+        center
+            img#q(src='/images/Q.jpg')
+            br
+            img#a1(src='/images/A.jpg' onclick='selekt(1)')
+            img#a2(src='/images/A.jpg' onclick='selekt(2)')
+            br
+            img#a3(src='/images/A.jpg' onclick='selekt(3)')
+            img#a4(src='/images/A.jpg' onclick='selekt(4)')
+        div#qu(style='position: absolute; color: #fff;')
+            p#tq Question
+        div#d1(style='position: absolute; color: #fff;')
+            p#t1 A1
+        div#d2(style='position: absolute; color: #fff;')
+            p#t2 A2
+        div#d3(style='position: absolute; color: #fff;')
+            p#t3 A3
+        div#d4(style='position: absolute; color: #fff;')
+            p#t4 A4
+    input#gameId(type="hidden", value=id)
+    input#currentQuestion(type="hidden", value=-1)

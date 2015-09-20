@@ -7,7 +7,6 @@ var gameManager = require('./../BL/GameManager.js');
 
 router.post('/', function(req, res)
 {
-    res.header("Content-Type","application/json;charset=utf-8");
     var opration = req.body.Operation;
     if (opration == "Start Game!")
     {
