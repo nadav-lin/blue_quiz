@@ -9,7 +9,7 @@ router.post('/', function(req, res)
 {
     var opration = req.body.Operation;
 
-    if (opration == "Start Game!")
+    if (opration == "התחל משחק!")
     {
         var gameId = req.body.chosenGameId;
 

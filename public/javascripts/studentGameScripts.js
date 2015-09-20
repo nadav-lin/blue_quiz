@@ -1,14 +1,17 @@
 /**
- * Created by ×¤× ×™× ×” on 12/09/2015.
+ * Created by ôðéðä on 12/09/2015.
  */
 var selected=0;
 var waiting=false;
 var corr=0;
-
+var usedFifty=false;
+var fiftyRem=[];
 //-- select answer
 function selekt(num)
 {
     if(waiting)
+        return;
+    if(usedFifty && fiftyRem.indexOf(num)!=-1)
         return;
     if(selected!=0){
         $("#a"+selected.toString()).attr('src','/images/A.jpg');
@@ -38,7 +41,8 @@ function longPoll_feed ()
         },
         success: function (data) {
             display_event(data);
-
+            if(data.over)
+                return;
             //if everything went well, begin another request immediately
             //the server will take a long time to respond
             //how long? well, it will wait until there is another message
@@ -75,7 +79,19 @@ function placeDiv(){
     l=inf.left;
     $("#qu").css({top:t+10,left:l+85});
 }
+function fify(){
 
+    if(usedFifty)
+        return;
+    $('#fifty').hide();
+    $("#d"+fiftyRem[0].toString()).css({color:'black'});
+    $("#d"+fiftyRem[1].toString()).css({color:'black'});
+    if(fiftyRem.indexOf(selected)!=-1){
+        $("#a"+selected.toString()).attr('src','/images/A.jpg');
+        selected=0;
+    }
+    usedFifty=true;
+}
 function display_event(data)
 {
     if(data.wait){
@@ -91,7 +107,6 @@ function display_event(data)
         for(i=1;i<5;i++) {
             $('#t' + i.toString()).html(" ");
         }
-
         return;
     }
     if (data != null)
@@ -105,11 +120,20 @@ function display_event(data)
         });
         $('#t'+corr.toString()).html(data.right_answer);
         var j=0;
-        for(i=1;i<5;i++) {
+        for(i=1;i<5;++i) {
             if (i == corr)
                 continue;
             $('#t' + i.toString()).html(anss[j]);
             j++;
+        }
+        var i=corr;
+        fiftyRem=[];
+        while(i==corr && fiftyRem.length<2)
+        {
+            i=Math.floor(Math.random()*4)+1;
+            if(i!=corr && fiftyRem.indexOf(i)==-1)
+                fiftyRem.push(i);
+            i=corr;
         }
         for(i=1;i<5;i++) {
             $("#a"+i.toString()).attr('src','/images/A.jpg');
