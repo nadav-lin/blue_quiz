@@ -2,13 +2,19 @@
 doctype html
 html(lang="he")
     meta(charset="utf-8")
-    head(dir="rtl")
-        div#BLUE
-            h1="Project Blue"
-        title= "נחום"
+    head
+
+        link(rel='stylesheet', href='/bootstrap-3.3.5-dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/bootstrap-3.3.5-dist/css/bootstrap-responsive.min.css')
+        script(src='javascripts/jquery.js')
+        script(src='/bootstrap-3.3.5-dist/js/bootstrap.min.js')
+
+        div#TITLE
+            h1="נחום כחול"
+        title= "גיא"
         link(rel='stylesheet', href='/stylesheets/style.css')
-    body
-        div#title2 שי
+    body(dir="rtl")
+        div#content
             block content
-        div#CopyR
-            h5=" Copyright Ofek"
+            div#CopyR.navbar.navbar-fixed-bottom
+                h5="Copyright Ofek"

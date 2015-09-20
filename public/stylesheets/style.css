@@ -1,25 +1,41 @@
+
 body {
-  /*  padding: 80px;*/
   font: 20px "Lucida Grande", David, Arial, sans-serif;
 }
-#title2 {
+#content {
+  min-height: 100%;
+  position: relative;
   color: blue;
-  background-color: beige;
-  margin-left: auto;
-  margin-right: auto;
-  /*width: 800px;*/
+  background-color: white;
+  margin-bottom: 0;
+  margin-top: 0;
   padding: 20px;
 }
-#BLUE{
+#TITLE{
+  margin-top: 0px;
   background-color: blue;
   color: white;
   text-align: center;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
 }
+
 #CopyR{
+  margin-top: 0;
   background-color: blue;
   color: white;
   text-align: center;
+  width: 100%;
 }
-a {
+
+
+a{
   color: #00B7FF;
+}
+
+footer{
+  position: absolute;
+  height: 100px;
 }

@@ -1,16 +1,20 @@
 extends layout
+extends layout
 
 block content
-    h1= "Login"
+    h1= "כניסת משתמשים"
     br
     form(name="login", action="/login", method="post")
-        lable Username:
-        input(type="text", name="userName", value="student")
-        br
-        label Password:
-        input(type="password", name="pass")
-        br
-        input(type="submit", value="login")
-    br
-    //msg need to be red
-    label= msg
+        div#table
+            table
+                tr
+                    td
+                        input(placeholder="שם משתמש" ,type="text", name="userName")
+                tr
+                    td
+                        input(placeholder="סיסמה",type="password", name="pass",color="blue")
+            br
+            input(type="submit", value="התחבר")
+            br
+            //msg need to be red
+            label= msg

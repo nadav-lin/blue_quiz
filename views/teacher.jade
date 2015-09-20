@@ -1,10 +1,9 @@
-//
-   Created by user on 04/09/2015.
+//Created by user on 04/09/2015.
 extends layout
 
 block content
-   h1= "teacher"
-   h2= "welcome:" + userName
+   h1= "מרצה"
+   h2= "ברוך הבא: " + userName
 
    form(name="teacherOption", action="/teacher", method="post")
         each quiz in quizes
@@ -13,6 +12,5 @@ block content
            br
         br
         input(type="submit",name="Operation", value="Start Game!")
-        //add check if a quiz is choosen, else dont send! (can do it in javascrypt);
         input(type="submit", name="Operation", value="Edit quiz")
         input(type="submit", name="Operation", value="Add Quiz")

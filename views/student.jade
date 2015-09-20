@@ -3,12 +3,12 @@
 extends layout
 
 block content
-   h1= "student"
-   h2= "welcome:" + userName
+   h1= "תלמיד"
+   h2= "ברוך הבא: "+ userName
 
    form(name="studentOption", action="/student", method="post")
       each key in keys
          input(type="radio", name="chosenGameId", value=key)
          label #{key}
       br
-      input(type="submit",name="Operation", value="Start Game!")
+      input(type="submit",name="Operation", value="התחל משחק!",ba)
