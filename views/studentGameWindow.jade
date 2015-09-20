@@ -1,0 +1,28 @@
+//
+   Created by פנינה on 12/09/2015.
+extends layout
+block content
+   h1#mytitle student Game
+
+   h1#question
+   br
+
+   input(type="radio", name="chosenAnswer", value=op1)
+   label#op1
+   br
+   input(type="radio", name="chosenAnswer", value=op2)
+   label#op2
+   br
+   input(type="radio", name="chosenAnswer", value=op3)
+   label#op3
+   br
+   input(type="radio", name="chosenAnswer", value=op4)
+   label#op4
+   br
+   br
+
+   input#gameId(type="hidden", value=id)
+   input#currentQuestion(type="hidden", value=-1)
+
+   script(src="/javascripts/jquery.js")
+   script(src="/javascripts/studentGameScripts.js")

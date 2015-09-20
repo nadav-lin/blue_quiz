@@ -1,0 +1,25 @@
+body {
+  /*  padding: 80px;*/
+  font: 20px "Lucida Grande", David, Arial, sans-serif;
+}
+#title2 {
+  color: blue;
+  background-color: beige;
+  margin-left: auto;
+  margin-right: auto;
+  /*width: 800px;*/
+  padding: 20px;
+}
+#BLUE{
+  background-color: blue;
+  color: white;
+  text-align: center;
+}
+#CopyR{
+  background-color: blue;
+  color: white;
+  text-align: center;
+}
+a {
+  color: #00B7FF;
+}

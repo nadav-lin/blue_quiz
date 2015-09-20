@@ -1,0 +1,14 @@
+//edit quiz + new quiz page.
+// michal + shay
+// need to send request with jason that include all the quiz's parameters
+   Created by user on 04/09/2015.
+extends layout
+
+block content
+    if(id == "")
+        h1="Creating new quiz!"
+    else
+        h1="Edit quiz, id=" + id
+
+    input(type="hidden", name="quizId" value=id)
+    //name, questions, name of creator...

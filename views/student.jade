@@ -1,0 +1,14 @@
+//
+   Created by user on 04/09/2015.
+extends layout
+
+block content
+   h1= "student"
+   h2= "welcome:" + userName
+
+   form(name="studentOption", action="/student", method="post")
+      each key in keys
+         input(type="radio", name="chosenGameId", value=key)
+         label #{key}
+      br
+      input(type="submit",name="Operation", value="Start Game!")

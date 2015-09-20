@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1= "Login"
+    br
+    form(name="login", action="/login", method="post")
+        lable Username:
+        input(type="text", name="userName", value="student")
+        br
+        label Password:
+        input(type="password", name="pass")
+        br
+        input(type="submit", value="login")
+    br
+    //msg need to be red
+    label= msg

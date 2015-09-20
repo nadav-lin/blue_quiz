@@ -1,0 +1,18 @@
+//
+   Created by user on 04/09/2015.
+extends layout
+
+block content
+   h1= "teacher"
+   h2= "welcome:" + userName
+
+   form(name="teacherOption", action="/teacher", method="post")
+        each quiz in quizes
+           input(type="radio", name="chosenQuizId", value=quiz.quiz_id)
+           label #{quiz.quiz_name}
+           br
+        br
+        input(type="submit",name="Operation", value="Start Game!")
+        //add check if a quiz is choosen, else dont send! (can do it in javascrypt);
+        input(type="submit", name="Operation", value="Edit quiz")
+        input(type="submit", name="Operation", value="Add Quiz")

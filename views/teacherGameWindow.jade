@@ -1,0 +1,14 @@
+//
+   Created by פנינה on 12/09/2015.
+extends layout
+block content
+   h1#mytitle Teacher game window
+   br
+   br
+   h2#currentQuestion
+
+   input#NextQuestion(type="button", value="Next Question")
+   input#gameId(type="hidden", value=id)
+
+   script(src="/javascripts/jquery.js")
+   script(src="/javascripts/teacherGameScripts.js")
