@@ -106,6 +106,7 @@ function display_event(data)
         waiting=true;
         for(i=1;i<5;i++) {
             $('#t' + i.toString()).html(" ");
+            $("#a"+i.toString()).attr('src','/images/A.jpg');
         }
         return;
     }
@@ -142,6 +143,7 @@ function display_event(data)
 
         document.getElementById("currentQuestion").value = data.index;
         //$("#currentQuestion").value = data.index;
+        usedFifty=false;
     }
 
 }
