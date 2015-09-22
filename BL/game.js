@@ -5,23 +5,34 @@ var mySql = require('./../DAL/mySql.js');
 
 var Game = function(chosenQuizId)
 {
+    var studentAnswers = {1:0, 2:0, 3:0, 4:0};
+
     var isStarted = false;
     var name = "gameName";
     var currentQuestionIndex = -1;
     var questions = [];
     var connections = [];
 
-    mySql.getQuestions(function(err, result)
+    this.PushAnswer = function (index)
     {
-        questions = result;
-    }, chosenQuizId);
+        if (studentAnswers[index])
+        {
+            studentAnswers[index]++;
+        }
+    };
 
     this.EndQuestion = function (res)
     {
+        // send studentAnswers and reset the dic
         var waitSignal = JSON.stringify({wait: "true"});
         res.end(waitSignal);
 
         Disturbute(waitSignal);
+
+        for(var index = 1; index <= 4; ++index)
+        {
+            studentAnswers[index] = 0;
+        }
     };
 
     this.EndGame = function (res)
@@ -54,28 +65,10 @@ var Game = function(chosenQuizId)
         else
         {
             var gameOverSignal = JSON.stringify({over: "true"});
-
             res.end(gameOverSignal);
             Disturbute(gameOverSignal);
         }
     };
-
-    function Disturbute(itemToSend)
-    {
-        var length = connections.length;
-
-        for (var index = 0; index < length; ++index)
-        {
-            try
-            {
-                connections.pop().end(itemToSend);
-            }
-            catch (e)
-            {
-                console.log("FAILED! " + e.message);
-            }
-        }
-    }
 
     this.GetCurrentQuestion = function (userCurrentQuestion, res)
     {
@@ -104,6 +97,28 @@ var Game = function(chosenQuizId)
             res.end(JSON.stringify(tempQuestion));
         }
     };
+
+    mySql.getQuestions(function(err, result)
+    {
+        questions = result;
+    }, chosenQuizId);
+
+    function Disturbute(itemToSend)
+    {
+        var length = connections.length;
+
+        for (var index = 0; index < length; ++index)
+        {
+            try
+            {
+                connections.pop().end(itemToSend);
+            }
+            catch (e)
+            {
+                console.log("FAILED! " + e.message);
+            }
+        }
+    }
 };
 
 module.exports = Game;

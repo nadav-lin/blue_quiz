@@ -1,9 +1,21 @@
 /**
- * Created by ����� on 12/09/2015.
+ * Created by פנינה on 12/09/2015.
  */
-$('#NextQuestion').click(function()
+$('#NextQuestionBtn').click(function()
 {
-    var operation = "NextQuestion";
+    var currentMode = document.getElementById("NextQuestionBtn").value;
+    var operation;
+    if (currentMode == "עבור שאלה")
+    {
+        document.getElementById("NextQuestionBtn").value = "סיים שאלה";
+        operation = "NextQuestion";
+    }
+    else
+    {
+        document.getElementById("NextQuestionBtn").value = "עבור שאלה";
+        operation = "EndQuestion";
+    }
+
     var gameId = document.getElementById("gameId").value;
 
     $.ajax({
@@ -16,7 +28,8 @@ $('#NextQuestion').click(function()
         { },
         success: function (data)
         {
-            document.getElementById("currentQuestion").textContent = data.question_desc;
+            if(data.question_desc)
+                document.getElementById("currentQuestion").textContent = data.question_desc;
         }
     });
 

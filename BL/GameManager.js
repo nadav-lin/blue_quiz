@@ -12,6 +12,11 @@ function GetGameId()
     //return 1;
 }
 
+exports.PushAnswer = function(gameId, userCurrentQuestion, studentAnswer)
+{
+
+};
+
 exports.AddGame = function(chosenQuizId)
 {
     var currentGame = new game(chosenQuizId);

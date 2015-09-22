@@ -2,14 +2,20 @@
    Created by פנינה on 12/09/2015.
 extends layout
 block content
-   h1#mytitle Teacher game window
-   br
-   br
-   h2#currentQuestion guy
+   center
+      h1#mytitle= "Game: " + id
+      br
+      br
+      h2#currentQuestion
 
-   input#NextQuestion(type="button", value="Next question")
-   input#EndQuestion(type="button", value="End question")
-   input#EndGame(type="button", value="End game")
+      input#NextQuestionBtn(type="button", value="עבור שאלה")
+      //input#EndQuestion(type="button", value="End question")
+      input#EndGame(type="button", value="End game")
+      //mixin book(name, price)
+      //   li #{name} for #{price} €
+      //      ul#books
+      //   +book("Book A", 12.99)
+      //   +book("Book B", 5.99)
 
    input#gameId(type="hidden", value=id)
 
