@@ -17,12 +17,11 @@ exports.PushAnswer = function(gameId, userCurrentQuestion, studentAnswer)
 
 };
 
-exports.AddGame = function(chosenQuizId)
+exports.AddGame = function(chosenQuizId, res)
 {
-    var currentGame = new game(chosenQuizId);
     var id = GetGameId();
+    var currentGame = new game(chosenQuizId, res, id);
     gameDic[id]= currentGame;
-    return id;
 };
 
 exports.EndGame = function(gameId, res)
@@ -34,11 +33,11 @@ exports.EndGame = function(gameId, res)
     }
 };
 
-exports.GetNextQuestion = function(gameId, res)
+exports.GetNextQuestion = function(gameId, res, newQuestionIndex)
 {
     if(gameDic[gameId])
     {
-        gameDic[gameId].GetNextQuestion(res);
+        gameDic[gameId].GetNextQuestion(res, newQuestionIndex);
     }
 };
 

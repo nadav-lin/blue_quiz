@@ -16,7 +16,8 @@ router.post('/', function(req, res)
     {
         case("NextQuestion"):
         {
-            manager.GetNextQuestion(gameId, res);
+            var newQuestionIndex = req.body.currentQuestionIndex;
+            manager.GetNextQuestion(gameId, res, newQuestionIndex);
             break;
         }
         case("EndQuestion"):

@@ -3,15 +3,20 @@
  */
 var mySql = require('./../DAL/mySql.js');
 
-var Game = function(chosenQuizId)
+var Game = function(chosenQuizId, res, gameId)
 {
     var studentAnswers = {1:0, 2:0, 3:0, 4:0};
 
     var isStarted = false;
-    var name = "gameName";
     var currentQuestionIndex = -1;
     var questions = [];
     var connections = [];
+
+    mySql.getQuestions(function(err, result)
+    {
+        questions = result;
+        res.render('teacherGameWindow', {id: gameId, questions: result});
+    }, chosenQuizId);
 
     this.PushAnswer = function (index)
     {
@@ -43,18 +48,18 @@ var Game = function(chosenQuizId)
         Disturbute(gameOverSignal);
     };
 
-    this.GetNextQuestion = function (res)
+    this.GetNextQuestion = function (res, newQuestionIndex)
     {
-        currentQuestionIndex++;
+        currentQuestionIndex = newQuestionIndex;
 
         if (!isStarted)
         {
             isStarted = true;
         }
 
-        if(questions.length > currentQuestionIndex)
+        if(questions.length >= currentQuestionIndex)
         {
-            var question = questions[currentQuestionIndex];
+            var question = questions[currentQuestionIndex - 1];
             question.index = currentQuestionIndex;
 
             var questionJason = JSON.stringify(question);
@@ -97,11 +102,6 @@ var Game = function(chosenQuizId)
             res.end(JSON.stringify(tempQuestion));
         }
     };
-
-    mySql.getQuestions(function(err, result)
-    {
-        questions = result;
-    }, chosenQuizId);
 
     function Disturbute(itemToSend)
     {

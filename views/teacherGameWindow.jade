@@ -11,13 +11,22 @@ block content
       input#NextQuestionBtn(type="button", value="עבור שאלה")
       //input#EndQuestion(type="button", value="End question")
       input#EndGame(type="button", value="End game")
-      //mixin book(name, price)
-      //   li #{name} for #{price} €
-      //      ul#books
-      //   +book("Book A", 12.99)
-      //   +book("Book B", 5.99)
+
+   div
+      // shay: add to css padding + right to left for tables.
+      table#questionTable(border='1')
+         thead
+            tr
+               th #
+               th שאלות
+         tbody
+            each question, i in questions
+               tr(bgcolor= i==0 ? 'red' : 'white')
+                  td= i+1
+                  td= question.question_desc
 
    input#gameId(type="hidden", value=id)
+   input#currentQuestionIndex(type="hidden", value=1)
 
    script(src="/javascripts/jquery.js")
    script(src="/javascripts/teacherGameScripts.js")

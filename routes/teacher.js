@@ -10,8 +10,7 @@ router.post('/', function(req, res)
     var opration = req.body.Operation;
     if (opration == "Start Game!")
     {
-        var id = gameManager.AddGame(req.body.chosenQuizId)
-        res.render('teacherGameWindow', {id: id});
+        result = gameManager.AddGame(req.body.chosenQuizId, res);
     }
     else if (opration == "Edit quiz")
     {
