@@ -8,6 +8,7 @@ var usedFifty=false;
 var fiftyRem=[];
 var gameId;
 var currentQuestion;
+var traceback={};
 //-- select answer
 function selekt(num)
 {
@@ -100,15 +101,16 @@ function display_event(data)
         waiting=true;
         $("#a"+corr.toString()).attr('src','/images/R.jpg');
         $("#d"+corr.toString()).css({color:'black'});
+        alert(traceback[selected].toString());
         var exp ={ gameId: gameId,
             currentQuestion: currentQuestion,
-            myAnswer: selected};
+            myAnswer: traceback[selected]};
         $.ajax({
             cache: false,
             dataType: 'json',
             type: "POST",
             data: exp,
-            url: "/studentGame",});
+            url: "/studentGame"});
         return;
     }
     if(data.over)
@@ -126,18 +128,33 @@ function display_event(data)
         currentQuestion=data.index;
         gameId=data.gameId;
         waiting=false;
-        var right=Math.floor(Math.random()*4)+1;
-        corr=right;
+        corr=Math.floor(Math.random()*4)+1;
         $('#tq').html(currentQuestion+". "+data.question_desc);
+        alert(data.answer1+" "+data.answer2+" "+data.answer3);
         var anss=[data.answer1,data.answer2,data.answer3].sort(function() {
             return 0.5 - Math.random();
         });
+
         $('#t'+corr.toString()).html(data.right_answer);
         var j=0;
         for(i=1;i<5;++i) {
             if (i == corr)
                 continue;
             $('#t' + i.toString()).html(anss[j]);
+            switch(anss[j]){
+                case data.answer1:
+                    traceback[i]=1;
+                    break;
+                case data.answer2:
+                    traceback[i]=2;
+                    break;
+                case data.answer3:
+                    traceback[i]=3;
+                    break;
+                case data.right_answer:
+                    traceback[i]=0;
+                    break;
+            }
             j++;
         }
         var i=corr;
