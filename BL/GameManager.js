@@ -2,13 +2,14 @@
  * Created by user on 13/09/2015.
  */
 var game = require('./game.js');
+var uuid=require('./uuid.js');
 var gameDic = {};
 var id = 0;
 
 function GetGameId()
 {
     // refactor this so the id will reset himself
-    return id++;
+    return uuid.v1();//return id++;
     //return 1;
 }
 

@@ -6,6 +6,8 @@ var waiting=false;
 var corr=0;
 var usedFifty=false;
 var fiftyRem=[];
+var gameId;
+var currentQuestion;
 //-- select answer
 function selekt(num)
 {
@@ -98,6 +100,15 @@ function display_event(data)
         waiting=true;
         $("#a"+corr.toString()).attr('src','/images/R.jpg');
         $("#d"+corr.toString()).css({color:'black'});
+        var exp ={ gameId: gameId,
+            currentQuestion: currentQuestion,
+            myAnswer: selected};
+        $.ajax({
+            cache: false,
+            dataType: 'json',
+            type: "POST",
+            data: exp,
+            url: "/studentGame",});
         return;
     }
     if(data.over)
@@ -112,10 +123,12 @@ function display_event(data)
     }
     if (data != null)
     {
+        currentQuestion=data.index;
+        gameId=data.gameId;
         waiting=false;
         var right=Math.floor(Math.random()*4)+1;
         corr=right;
-        $('#tq').html((data.index+1).toString()+". "+data.question_desc);
+        $('#tq').html(currentQuestion+". "+data.question_desc);
         var anss=[data.answer1,data.answer2,data.answer3].sort(function() {
             return 0.5 - Math.random();
         });
