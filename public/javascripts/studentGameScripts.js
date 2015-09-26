@@ -101,7 +101,6 @@ function display_event(data)
         waiting=true;
         $("#a"+corr.toString()).attr('src','/images/R.jpg');
         $("#d"+corr.toString()).css({color:'black'});
-        alert(traceback[selected].toString());
         var exp ={ gameId: gameId,
             currentQuestion: currentQuestion,
             myAnswer: traceback[selected]};
@@ -130,7 +129,6 @@ function display_event(data)
         waiting=false;
         corr=Math.floor(Math.random()*4)+1;
         $('#tq').html(currentQuestion+". "+data.question_desc);
-        alert(data.answer1+" "+data.answer2+" "+data.answer3);
         var anss=[data.answer1,data.answer2,data.answer3].sort(function() {
             return 0.5 - Math.random();
         });
