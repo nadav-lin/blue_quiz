@@ -13,9 +13,20 @@ function GetGameId()
     //return 1;
 }
 
+exports.GetStatistic = function(gameId, questionIndex, res)
+{
+    if(gameDic[gameId])
+    {
+        gameDic[gameId].GetStatistic(questionIndex, res);
+    }
+};
+
 exports.PushAnswer = function(gameId, userCurrentQuestion, studentAnswer)
 {
-
+    if(gameDic[gameId])
+    {
+        gameDic[gameId].PushAnswer(userCurrentQuestion, studentAnswer);
+    }
 };
 
 exports.AddGame = function(chosenQuizId, res)

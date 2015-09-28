@@ -39,7 +39,8 @@ function longPoll_feed ()
         url: "/studentGame",
         error: function (e) {
             //don't flood the servers on error, wait 1 seconds before retrying
-            alert("error " + e.message);
+            //delete this on operational
+            // alert("error " + e.message);
             setTimeout(longPoll_feed, 1000);
         },
         success: function (data) {
@@ -97,13 +98,16 @@ function fify(){
 }
 function display_event(data)
 {
-    if(data.wait){
+    if(data.wait)
+    {
+        var currentQuestion = document.getElementById("currentQuestion").value;
+        var gameId = document.getElementById("gameId").value;
         waiting=true;
         $("#a"+corr.toString()).attr('src','/images/R.jpg');
         $("#d"+corr.toString()).css({color:'black'});
         var exp ={ gameId: gameId,
             currentQuestion: currentQuestion,
-            myAnswer: traceback[selected]};
+            myAnswer: "1"}; //traceback[selected]};
         $.ajax({
             cache: false,
             dataType: 'json',
@@ -173,5 +177,4 @@ function display_event(data)
         //$("#currentQuestion").value = data.index;
         usedFifty=false;
     }
-
 }

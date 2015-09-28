@@ -22,7 +22,17 @@ router.post('/', function(req, res)
         }
         case("EndQuestion"):
         {
+            console.log("EndQuestion");
+
             manager.EndQuestion(gameId, res);
+            break;
+        }
+        case("GetStatistic"):
+        {
+            console.log("GetStatistic");
+
+            var questionIndex = req.body.questionIndex;
+            manager.GetStatistic(gameId, questionIndex, res);
             break;
         }
         case("EndGame"):

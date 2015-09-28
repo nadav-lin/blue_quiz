@@ -15,6 +15,25 @@ function updateTable(previousIndex)
 
 }
 
+function resetBars()
+{
+    var a = document.getElementById("currAnswerBar");
+    var b = document.getElementById("Answer1Bar");
+    var c = document.getElementById("Answer2Bar");
+    var d = document.getElementById("Answer3Bar");
+
+    a.style.width = '15px';
+    a.textContent = 0;
+
+    b.style.width = '15px';
+    b.textContent = 0;
+
+    c.style.width = '15px';
+    c.textContent = 0;
+
+    d.style.width = '15px';
+    d.textContent = 0;
+}
 
 $('#NextQuestionBtn').click(function()
 {
@@ -25,7 +44,9 @@ $('#NextQuestionBtn').click(function()
     var data;
     var operation;
 
-    if (currentMode == "עבור שאלה") {
+    if (currentMode == "עבור שאלה")
+    {
+        resetBars();
         document.getElementById("NextQuestionBtn").value = "סיים שאלה";
         operation = "NextQuestion";
         data = {gameId: gameId, operation: operation, currentQuestionIndex: currentQuestionIndex};
@@ -46,43 +67,74 @@ $('#NextQuestionBtn').click(function()
         url: "/teacherGame",
         error: function (e) {
         },
-        success: function (data) {
+        success: function (data)
+        {
             if (data.question_desc)
+            {
                 document.getElementById("currentQuestion").textContent = data.question_desc;
+                document.getElementById("currAns").textContent = data.right_answer;
+                document.getElementById("Answer1").textContent = data.answer1;
+                document.getElementById("Answer2").textContent = data.answer2;
+                document.getElementById("Answer3").textContent = data.answer3;
+
+            }
         }
     });
 });
 
-$('#EndGame').click(function()
+$('#GetStatisticBtn').click(function()
 {
-    $.post('/teacherGame',
-        {
-            operation: "EndGame",
-            gameId: document.getElementById("gameId").value,
+    data = {gameId: document.getElementById("gameId").value, operation: "GetStatistic",
+            questionIndex: document.getElementById("currentQuestionIndex").value};
+
+    $.ajax({
+        cache: false,
+        dataType: 'json',
+        type: "POST",
+        data: data,
+        url: "/teacherGame",
+        error: function (e) {
         },
-        function(data, status)
+        success: function (data)
         {
-            //$('#currentQuestion').html(data);
-        });
+            var a = document.getElementById("currAnswerBar");
+            var b = document.getElementById("Answer1Bar");
+            var c = document.getElementById("Answer2Bar");
+            var d = document.getElementById("Answer3Bar");
+
+
+           // var temp = math.mul32(data["0"], 15);
+         //   alert(temp);
+          // var temp1= '40px';
+          //  a.style.width = temp +'px';
+            a.textContent = data["0"];
+
+          //  b.style.width = temp1;
+            b.textContent = data["1"];
+
+          //  c.style.width = (15 + 15 * data["0"]).toString() + 'px';;
+            c.textContent = data["2"];
+
+           // d.style.width = (15 + 15 * data["0"]).toString() + 'px';;
+            d.textContent = data["3"];
+        }
+    });
 });
 
 $(document).ready(function ()
 {
-    $('table tr').each(function(tbl, tr)
+    $('.questionTable tr').click(function()
     {
-        $(tr).click(function()
+        var index = $(this).find("td:first").html();
+
+        // header of table was clicked
+        if (index == null)
         {
-            var index = $(this).find("td:first").html();
+            return;
+        }
 
-            // header of table was clicked
-            if (index == null)
-            {
-                return;
-            }
-
-            $('table tr').css('background','#ffffff');
-            $(this).css('background','#ff0000');
-            document.getElementById("currentQuestionIndex").value = $(this).find("td:first").html();
-        });
+        $('table tr').css('background', '#ffffff');
+        $(this).css('background', '#ff0000');
+        document.getElementById("currentQuestionIndex").value = $(this).find("td:first").html();
     });
 });

@@ -15,11 +15,14 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
+ /**
  * Create HTTP server.
  */
 
+// http.globalAgent.maxSockets = 20; // Tried allowing more than magic 6 connections per origin
 var server = http.createServer(app);
+server.maxConnections = 100; // Permit up to 100 connections from different hosts
+
 
 /**
  * Listen on provided port, on all network interfaces.

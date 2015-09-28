@@ -14,10 +14,14 @@ router.post('/', function(req, res)
 
     if (myAnswer)
     {
-        manager.PushAnswer(gameId, currentQuestion, myAnswer)
+        console.log("myAnswer = " + myAnswer);
+        manager.PushAnswer(gameId, currentQuestion, myAnswer);
+        res.end();
     }
     else
     {
+        console.log("GetCurrentQuestion = ");
+
         manager.GetCurrentQuestion(gameId, currentQuestion, res);
     }
 });

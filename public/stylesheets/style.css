@@ -22,6 +22,15 @@ body {
   top: 0px;
 }
 
+.chart div {
+  font: 15px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
 #CopyR{
   margin-top: 0;
   background-color: blue;

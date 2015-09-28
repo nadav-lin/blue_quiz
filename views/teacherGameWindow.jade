@@ -4,17 +4,33 @@ extends layout
 block content
    center
       h1#mytitle= "Game: " + id
-      br
-      br
       h2#currentQuestion
+      table
+         tbody
+            tr
+               td
+                  div
+                     h4#currAns(style="color: green;")
+                     h4#Answer1
+                     h4#Answer2
+                     h4#Answer3
+               td(width="25")
+               td
+                  div(class="chart")
+                     div#currAnswerBar(style="width: 15px;") 0
+                     div#Answer1Bar(style="width: 15px;") 0
+                     div#Answer2Bar(style="width: 15px;") 0
+                     div#Answer3Bar(style="width: 15px;") 0
 
       input#NextQuestionBtn(type="button", value="עבור שאלה")
+      input#GetStatisticBtn(type="button", value="הראה סטטיסטיקה")
       //input#EndQuestion(type="button", value="End question")
       input#EndGame(type="button", value="End game")
 
+
    div
       // shay: add to css padding + right to left for tables.
-      table#questionTable(border='1')
+      table#questionTable(border='1', class='questionTable')
          thead
             tr
                th #

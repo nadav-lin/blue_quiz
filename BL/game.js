@@ -5,8 +5,7 @@ var mySql = require('./../DAL/mySql.js');
 
 var Game = function(chosenQuizId, res, gameId)
 {
-    var studentAnswers = {1:0, 2:0, 3:0, 4:0};
-
+    var questionsStatistics = {};
     var isStarted = false;
     var currentQuestionIndex = -1;
     var questions = [];
@@ -15,14 +14,24 @@ var Game = function(chosenQuizId, res, gameId)
     mySql.getQuestions(function(err, result)
     {
         questions = result;
+        InitStatistic();
         res.render('teacherGameWindow', {id: gameId, questions: result});
     }, chosenQuizId);
 
-    this.PushAnswer = function (index)
+    this.GetStatistic = function (questionIndex, res)
     {
-        if (studentAnswers[index])
+        if (questionsStatistics[questionIndex])
         {
-            studentAnswers[index]++;
+            var questionStatistic = JSON.stringify(questionsStatistics[questionIndex]);
+            res.end(questionStatistic);
+        }
+    };
+
+    this.PushAnswer = function (userCurrentQuestion, studentAnswer)
+    {
+        if (questionsStatistics[userCurrentQuestion])
+        {
+            ++questionsStatistics[userCurrentQuestion][studentAnswer];
         }
     };
 
@@ -33,11 +42,6 @@ var Game = function(chosenQuizId, res, gameId)
         res.end(waitSignal);
 
         Disturbute(waitSignal);
-
-        for(var index = 1; index <= 4; ++index)
-        {
-            studentAnswers[index] = 0;
-        }
     };
 
     this.EndGame = function (res)
@@ -87,9 +91,9 @@ var Game = function(chosenQuizId, res, gameId)
             var tempQuestion = null;
 
             // if there is another question, give it to him
-            if (questions.length > currentQuestionIndex)
+            if (questions.length >= currentQuestionIndex)
             {
-                tempQuestion = questions[currentQuestionIndex];
+                tempQuestion = questions[currentQuestionIndex - 1];
             }
             else
             {
@@ -103,9 +107,18 @@ var Game = function(chosenQuizId, res, gameId)
         }
     };
 
+    function InitStatistic()
+    {
+        for (var index = 1; index <= questions.length; ++index)
+        {
+            questionsStatistics[index] = {0:0, 1:0, 2:0, 3:0};
+        }
+    }
+
     function Disturbute(itemToSend)
     {
         var length = connections.length;
+        console.log(length);
 
         for (var index = 0; index < length; ++index)
         {
