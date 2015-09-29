@@ -17,7 +17,7 @@ function updateTable(previousIndex)
 
 function resetBars()
 {
-    var a = document.getElementById("currAnswerBar");
+    var a = document.getElementById("rightAnswerBar");
     var b = document.getElementById("Answer1Bar");
     var c = document.getElementById("Answer2Bar");
     var d = document.getElementById("Answer3Bar");
@@ -97,26 +97,21 @@ $('#GetStatisticBtn').click(function()
         },
         success: function (data)
         {
-            var a = document.getElementById("currAnswerBar");
-            var b = document.getElementById("Answer1Bar");
-            var c = document.getElementById("Answer2Bar");
-            var d = document.getElementById("Answer3Bar");
+            var bars = {};
+            bars[0] = document.getElementById("rightAnswerBar");
+            bars[1]  = document.getElementById("Answer1Bar");
+            bars[2]  = document.getElementById("Answer2Bar");
+            bars[3]  = document.getElementById("Answer3Bar");
 
+            var factor = 300 / (data["0"] + data["1"] + data["2"] + data["3"]);
+            var length;
 
-           // var temp = math.mul32(data["0"], 15);
-         //   alert(temp);
-          // var temp1= '40px';
-          //  a.style.width = temp +'px';
-            a.textContent = data["0"];
-
-          //  b.style.width = temp1;
-            b.textContent = data["1"];
-
-          //  c.style.width = (15 + 15 * data["0"]).toString() + 'px';;
-            c.textContent = data["2"];
-
-           // d.style.width = (15 + 15 * data["0"]).toString() + 'px';;
-            d.textContent = data["3"];
+            for (var index = 0; index < 4; ++index)
+            {
+                length = Math.max(15 , (data[index.toString()] * 1.0) * factor);
+                bars[index].textContent = data[index.toString()];
+                bars[index].style.width = length + 'px';
+            }
         }
     });
 });

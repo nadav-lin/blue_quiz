@@ -1,7 +1,7 @@
 /**
- * Created by ôðéðä on 12/09/2015.
+ * Created by ï¿½ï¿½ï¿½ï¿½ï¿½ on 12/09/2015.
  */
-var selected=0;
+var selected=-1;
 var waiting=false;
 var corr=0;
 var usedFifty=false;
@@ -16,10 +16,10 @@ function selekt(num)
         return;
     if(usedFifty && fiftyRem.indexOf(num)!=-1)
         return;
-    if(selected!=0){
+    if(selected!=-1){
         $("#a"+selected.toString()).attr('src','/images/A.jpg');
         $("#d"+selected.toString()).css({color:'white'});
-        selected=0;
+        selected=-1;
     }
     var sel="#a"+num.toString();
     $(sel).attr('src','/images/S.jpg');
@@ -92,7 +92,7 @@ function fify(){
     $("#d"+fiftyRem[1].toString()).css({color:'black'});
     if(fiftyRem.indexOf(selected)!=-1){
         $("#a"+selected.toString()).attr('src','/images/A.jpg');
-        selected=0;
+        selected=-1;
     }
     usedFifty=true;
 }
@@ -102,12 +102,15 @@ function display_event(data)
     {
         var currentQuestion = document.getElementById("currentQuestion").value;
         var gameId = document.getElementById("gameId").value;
+
         waiting=true;
         $("#a"+corr.toString()).attr('src','/images/R.jpg');
         $("#d"+corr.toString()).css({color:'black'});
         var exp ={ gameId: gameId,
             currentQuestion: currentQuestion,
-            myAnswer: "1"}; //traceback[selected]};
+            myAnswer: traceback[selected]};//  myAnswer: "1"}; //
+        if(selected==-1)
+            return;
         $.ajax({
             cache: false,
             dataType: 'json',
@@ -138,6 +141,7 @@ function display_event(data)
         });
 
         $('#t'+corr.toString()).html(data.right_answer);
+        traceback[corr]=0;
         var j=0;
         for(i=1;i<5;++i) {
             if (i == corr)
@@ -152,9 +156,6 @@ function display_event(data)
                     break;
                 case data.answer3:
                     traceback[i]=3;
-                    break;
-                case data.right_answer:
-                    traceback[i]=0;
                     break;
             }
             j++;
