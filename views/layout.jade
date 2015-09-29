@@ -1,20 +1,27 @@
-// define a background - michal, shay
+
 doctype html
 html(lang="he")
     meta(charset="utf-8")
     head
-
-        link(rel='stylesheet', href='/bootstrap-3.3.5-dist/css/bootstrap.min.css')
-        link(rel='stylesheet', href='/bootstrap-3.3.5-dist/css/bootstrap-responsive.min.css')
-        script(src='javascripts/jquery.js')
-        script(src='/bootstrap-3.3.5-dist/js/bootstrap.min.js')
-
-        div#TITLE
-            h1="נחום כחול"
-        title= "גיא"
         link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/bootstrap-3.3.5-dist/css/bootstrap.min.css')
+        //link(rel='stylesheet', href='/bootstrap-3.3.5-dist/css/bootstrap-responsive.min.css')
+        script(src='javascripts/jquery.js')
+        //script(src='bootstrap-3.3.5-dist/js/bootstrap.min.js')
+        script(src='bootstrap-3.3.5-dist/js/bootstrap.js')
+        div#TITLE.navbar-brand.navbar.navbar-inverse.navbar-fixed-top
+                נחום כחול
+
     body(dir="rtl")
-        div#content
-            block content
-            div#CopyR.navbar.navbar-fixed-bottom
-                h5="Copyright Ofek"
+        div#container
+            div#content.jumbotron
+                br
+                block content
+                br
+                
+
+        div#CopyR.modal-footer.navbar-inverse.wrapper
+          &copy; ofek 44
+          //h5="ofek 44"
+
+

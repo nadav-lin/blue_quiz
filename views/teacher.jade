@@ -1,16 +1,29 @@
-//Created by user on 04/09/2015.
+
 extends layout
 
 block content
-   h1= "מרצה"
-   h2= "ברוך הבא: " + userName
+    div#tHeader
+        מרצה
 
-   form(name="teacherOption", action="/teacher", method="post")
-        each quiz in quizes
-           input(type="radio", name="chosenQuizId", value=quiz.quiz_id)
-           label #{quiz.quiz_name}
-           br
-        br
-        input(type="submit",name="Operation", value="Start Game!")
-        input(type="submit", name="Operation", value="Edit quiz")
-        input(type="submit", name="Operation", value="Add Quiz")
+    div#userName
+        h2= "ברוך הבא: " + userName
+
+    div#Con.container
+      div#panel.panel.panel-primary
+       div#p.panel-heading
+                h3="משחקים"
+           form(name="teacherOption", action="/teacher", method="post")
+                table.table.table-hover.table-condensed
+                    each quiz in quizes
+                        tr
+                            th
+                                div#Games
+                                label #{quiz.quiz_name}
+                                input(type="radio", name="chosenQuizId", value=quiz.quiz_id)
+
+
+
+                div#btns.btn-group-vertical.btn-block
+                    input(type="submit",name="Operation", value="Start Game!").btn.btn-group-justified.btn-success
+                    input(type="submit", name="Operation", value="Edit quiz").btn.btn-group-justified.btn-success
+                    input(type="submit", name="Operation", value="Add Quiz").btn.btn-group-justified.btn-success

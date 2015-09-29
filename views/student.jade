@@ -3,12 +3,30 @@
 extends layout
 
 block content
-   h1= "תלמיד"
-   h2= "ברוך הבא: "+ userName
+   div#tHeader
+      תלמיד
 
-   form(name="studentOption", action="/student", method="post")
+   div#userName
+      h2= "ברוך הבא: " + userName
+
+   div#Con.container
+      div#panel.panel.panel-primary
+         div#p.panel-heading
+            h3="משחקים"
+         form(name="studentOption", action="/student", method="post")
+            table.table.table-hover
+               each key in keys
+                  tr
+                     th
+                        div#Games
+                           label #{key}
+
+
+ //  form(name="studentOption", action="/student", method="post")
       each key in keys
          input(type="radio", name="chosenGameId", value=key)
          label #{key}
       br
       input(type="submit",name="Operation", value="התחל משחק!",ba)
+
+

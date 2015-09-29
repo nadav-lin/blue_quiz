@@ -1,19 +1,23 @@
 extends layout
 
 block content
-    h1= "כניסת משתמשים"
-    br
-    form(name="login", action="/login", method="post")
-        div#table
-            table
-                tr
-                    td
-                        input(placeholder="שם משתמש" ,type="text", name="userName")
-                tr
-                    td
-                        input(placeholder="סיסמה",type="password", name="pass",color="blue")
-            br
-            input(type="submit", value="התחבר")
-            br
-            //msg need to be red
-            label= msg
+    div#LGT
+        כניסת משתמשים
+
+
+
+    div#Form
+        form(name="login", action="/login", method="post")
+            div#LOGform.well.form-group
+                div.form-group
+                    input(placeholder="שם משתמש" ,type="text", name="userName").form-control
+                div.form-group
+                    input(placeholder="סיסמה",type="password", name="pass",color="blue").form-control
+                div.form-group
+                    input(type="submit", value="התחבר").btn.btn-success.active.btn-lg
+
+
+
+
+
+
