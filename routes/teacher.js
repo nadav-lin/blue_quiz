@@ -18,7 +18,7 @@ router.post('/', function(req, res)
     }
     else
     {
-        res.render('quiz', {id: ""});
+        res.render('newQuizz', {id: ""});
     }
 
 });
