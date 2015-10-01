@@ -1,0 +1,32 @@
+--הוספת שדה טקסט חופשי
+ALTER TABLE `quizdb`.`questions` 
+ADD COLUMN `free_text` VARCHAR(300) NULL COMMENT '' AFTER `answer3`;
+
+
+--הוספת שדה מפתח של קוד הרשאה
+ALTER TABLE `quizdb`.`quiz` 
+ADD COLUMN `permission_id` INT(11) NOT NULL COMMENT '' AFTER `private`,
+ADD COLUMN `quizcol` VARCHAR(45) NULL COMMENT '' AFTER `permission_id`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`quiz_id`, `permission_id`)  COMMENT '';
+
+--טבלת הרשאות
+CREATE TABLE `quizdb`.`permissions` (
+  `permission_id` INT(11) NULL COMMENT '',
+  `user_id` INT(11) NULL COMMENT '');
+
+
+--הוספת מפתח USER_ID על שדה תז המשתמש
+ALTER TABLE `quizdb`.`permissions` 
+ADD INDEX `user_id_idx` (`user_id` ASC)  COMMENT '';
+ALTER TABLE `quizdb`.`permissions` 
+ADD CONSTRAINT `user_id`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `quizdb`.`users` (`user_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+--הוספת שדה סיסמה לטבלת משתמשים
+ALTER TABLE `quizdb`.`users` 
+ADD COLUMN `password` VARCHAR(45) NULL COMMENT 'Only the highest standards of security here.' AFTER `premission`;
