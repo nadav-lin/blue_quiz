@@ -37,4 +37,8 @@ CREATE TABLE `quizdb`.`categories` (
   PRIMARY KEY (`id`)  COMMENT '');
 
 ALTER TABLE `quizdb`.`quiz`
+
 ADD COLUMN `category_id` INT NULL COMMENT '' AFTER `quizcol`;
+
+ALTER TABLE `quizdb`.`quiz`
+DROP COLUMN `quizcol`;
