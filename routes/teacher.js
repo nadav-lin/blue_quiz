@@ -18,10 +18,10 @@ router.post('/', function(req, res)
     }
     else
     {
-        res.render('newQuizz', {id: ""});
+        var categories = [{id:1, name:'guy'}, {id:2, name:'guy2'}, {id:3, name:'guy3'}];
+        res.render('newQuizz', {categories: categories});
     }
 
 });
-
 
 module.exports = router;

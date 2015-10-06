@@ -12,16 +12,16 @@ html
       h1='New Quizz'
       br
       br
-      form(name="newQuizz", action="/newQ", method="post")
+      form(name="newQuizz", action="/quizz", method="post")
          table#MyTable(border=1,align='center',style='box')
             tr
                td(colspan='2')
                   input#name(type=text,value='Quizz name')
             tr
-               td(colspan='2') //---CATEGORY SELECTION
-                  select#category(type=text,value='Quizz name')
-                     each id,cat in categories
-                        option(value=id)=cat
+               td(colspan='2')
+                  select#category
+                     each category in categories
+                        option(value=category.id)=category.name
             each val in [1,2,3,4,5]
                tr
                   td
