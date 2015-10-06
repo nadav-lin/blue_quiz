@@ -41,5 +41,5 @@ function QueryFromDB(callback, queryStr)
 
 exports.getQuizes = function(callback)
 {
-    QueryFromDB(callback, "Select * from quiz")
+    QueryFromDB(callback, "Select * from quiz");
 }

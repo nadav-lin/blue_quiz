@@ -17,6 +17,11 @@ html
             tr
                td(colspan='2')
                   input#name(type=text,value='Quizz name')
+            tr
+               td(colspan='2') //---CATEGORY SELECTION
+                  select#category(type=text,value='Quizz name')
+                     each id,cat in categories
+                        option(value=id)=cat
             each val in [1,2,3,4,5]
                tr
                   td
