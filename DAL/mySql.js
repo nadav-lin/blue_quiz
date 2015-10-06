@@ -15,17 +15,18 @@ var question = function(question, op1, op2, op3, op4)
 
 exports.addQuizz = function(param) //-- ADD QUIZZ
 {
-    var queryStr = "INSERT INTO quiz VALUES (Null,"+param+");";
+    var queryStr = "INSERT INTO quiz (quiz_name,private,permission_id,category_id) VALUES ("+param+");";
     QueryFromDB(function(){}, queryStr);
 };
 exports.addQuestion = function(param) //-- ADD QUESTION
 {
-    var queryStr = "INSERT INTO questions (quiz_name,private,premission_id,category_id) VALUES ("+param+");";
+    var queryStr = "INSERT INTO questions (quiz_name,private,permission_id,category_id) VALUES ("+param+");";
     QueryFromDB(function(){}, queryStr);
 };
 exports.getQuizzId = function(name,callback)
 {
     var queryStr = "Select quiz_id from quiz where quiz_name = '" + name+"';";
+    console.log(queryStr);
     QueryFromDB(callback, queryStr);
 };
 exports.getQuestions = function(callback, quizId)

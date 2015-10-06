@@ -9,10 +9,11 @@ router.post('/', function(req, res)
 {
     quiz_name=req.body.name;
     categ=req.body.category;
-    mySql.addQuizz(quiz_name.toString()+',0,premission_id,'+categ.toString());
+    mySql.addQuizz("'"+quiz_name.toString()+"',0,8,"+categ.toString());
     mySql.getQuizzId(quiz_name,regQuestions);
+
 });
-function regQuestions(data){
+function regQuestions(err,data){
     console.log(data);
 }
 module.exports = router;
