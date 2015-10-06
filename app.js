@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var login = require('./routes/login');
+var quizz = require('./routes/quizz');
 var student = require('./routes/student');
 var teacher = require('./routes/teacher');
 var game = require('./routes/studentGame')
@@ -25,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
+app.use('/quizz', quizz);
 app.use('/login', login);
 app.use('/teacher', teacher);
 app.use('/student', student);

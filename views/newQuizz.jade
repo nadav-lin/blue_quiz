@@ -16,10 +16,10 @@ html
          table#MyTable(border=1,align='center',style='box')
             tr
                td(colspan='2')
-                  input#name(type=text,value='Quizz name')
+                  input#name(type=text,value='Quizz name',name='name')
             tr
                td(colspan='2')
-                  select#category
+                  select#category(name='category')
                      each category in categories
                         option(value=category.id)=category.name
             each val in [1,2,3,4,5]
