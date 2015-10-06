@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router =  express.Router();
 var manager = require('./../BL/GameManager.js');
 var mySql = require('./../DAL/mySql.js');
 
@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res)
 {
   var userName = req.body.userName;
-  console.log(userName)
+  console.log(userName);
   if (userName == "teacher")
   {
     mySql.getQuizes(function (err, result)

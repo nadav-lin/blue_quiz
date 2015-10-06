@@ -30,3 +30,11 @@ ADD CONSTRAINT `user_id`
 --הוספת שדה סיסמה לטבלת משתמשים
 ALTER TABLE `quizdb`.`users` 
 ADD COLUMN `password` VARCHAR(45) NULL COMMENT 'Only the highest standards of security here.' AFTER `premission`;
+
+CREATE TABLE `quizdb`.`categories` (
+  `id` INT NOT NULL COMMENT '',
+  `category` VARCHAR(45) NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '');
+
+ALTER TABLE `quizdb`.`quiz`
+ADD COLUMN `category_id` INT NULL COMMENT '' AFTER `quizcol`;
