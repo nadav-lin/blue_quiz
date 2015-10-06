@@ -88,6 +88,7 @@ function UpdateQuestion(data)
 
 $('#GetStatisticBtn').click(function()
 {
+    resetBars();
     data = {gameId: document.getElementById("gameId").value, operation: "GetStatistic",
             questionIndex: document.getElementById("currentQuestionIndex").value};
 
