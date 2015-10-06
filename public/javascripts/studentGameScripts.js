@@ -1,5 +1,5 @@
 /**
- * Created by ����� on 12/09/2015.
+ * Created by DANI on 12/09/2015.
  */
 var selected=-1;
 var waiting=false;
