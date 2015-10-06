@@ -22,8 +22,11 @@ var Game = function(chosenQuizId, res, gameId)
     {
         if (questionsStatistics[questionIndex])
         {
-            var questionStatistic = JSON.stringify(questionsStatistics[questionIndex]);
-            res.end(questionStatistic);
+            var result = {};
+            result["statistic"] = questionsStatistics[questionIndex];
+            result["question"] = questions[questionIndex - 1];
+            //var questionStatistic = JSON.stringify(result);
+            res.end(JSON.stringify(result));
         }
     };
 

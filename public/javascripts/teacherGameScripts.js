@@ -71,21 +71,31 @@ $('#NextQuestionBtn').click(function()
         {
             if (data.question_desc)
             {
-                document.getElementById("currentQuestion").textContent = data.question_desc;
-                document.getElementById("currAns").textContent = data.right_answer;
-                document.getElementById("Answer1").textContent = data.answer1;
-                document.getElementById("Answer2").textContent = data.answer2;
-                document.getElementById("Answer3").textContent = data.answer3;
-
+                UpdateQuestion(data);
             }
         }
     });
 });
 
+function UpdateQuestion(data)
+{
+    document.getElementById("currentQuestion").textContent = data.question_desc;
+    document.getElementById("currAns").textContent = data.right_answer;
+    document.getElementById("Answer1").textContent = data.answer1;
+    document.getElementById("Answer2").textContent = data.answer2;
+    document.getElementById("Answer3").textContent = data.answer3;
+}
+
 $('#GetStatisticBtn').click(function()
 {
     data = {gameId: document.getElementById("gameId").value, operation: "GetStatistic",
             questionIndex: document.getElementById("currentQuestionIndex").value};
+
+    if (document.getElementById("NextQuestionBtn").value == "סיים שאלה")
+    {
+        alert('לא ניתן לראות סטטיסטיקה כשיש שאלה פעילה');
+        return;
+    }
 
     $.ajax({
         cache: false,
@@ -97,19 +107,22 @@ $('#GetStatisticBtn').click(function()
         },
         success: function (data)
         {
+            UpdateQuestion(data["question"]);
+
             var bars = {};
             bars[0] = document.getElementById("rightAnswerBar");
             bars[1]  = document.getElementById("Answer1Bar");
             bars[2]  = document.getElementById("Answer2Bar");
             bars[3]  = document.getElementById("Answer3Bar");
 
-            var factor = 300 / (data["0"] + data["1"] + data["2"] + data["3"]);
+            var statistic = data["statistic"];
+            var factor = 300 / (statistic["0"] + statistic["1"] + statistic["2"] + statistic["3"]);
             var length;
 
             for (var index = 0; index < 4; ++index)
             {
-                length = Math.max(15 , (data[index.toString()] * 1.0) * factor);
-                bars[index].textContent = data[index.toString()];
+                length = Math.max(15 , (statistic[index.toString()] * 1.0) * factor);
+                bars[index].textContent = statistic[index.toString()];
                 bars[index].style.width = length + 'px';
             }
         }
