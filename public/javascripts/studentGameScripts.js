@@ -76,13 +76,29 @@ function placeDiv(){
         inf=$("#a"+i.toString()).position();
         t=inf.top;
         l=inf.left;
-        $("#d"+i.toString()).css({top:t-5,left:l+50});
+        $("#d"+i.toString()).css({top:t-5,left:l+375});
     }
     inf=$("#q").position();
     t=inf.top;
     l=inf.left;
-    $("#qu").css({top:t+10,left:l+85});
+    $("#qu").css({top:t+10,left:l+800});
 }
+
+/*
+ function placeDiv(){
+ for(var i=1;i<5;i++)
+ {
+ inf=$("#a"+i.toString()).position();
+ t=inf.top;
+ l=inf.left;
+ $("#d"+i.toString()).css({top:t-5,left:l+50});
+ }
+ inf=$("#q").position();
+ t=inf.top;
+ l=inf.left;
+ $("#qu").css({top:t+10,left:l+85});
+ }
+ */
 function fify(){
 
     if(usedFifty)
