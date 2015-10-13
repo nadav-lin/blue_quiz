@@ -13,6 +13,7 @@ html
       br
       br
       form(name="newQuizz", action="/quizz", method="post")
+         input(type="hidden",id='qCount',value=5,name='qc')
          table#MyTable(border=1,align='center',style='box')
             tr
                td(colspan='2')
@@ -27,14 +28,14 @@ html
                   td
                      p=val+'.'
                   td
-                     input(type=text,value='Question text',id='q'+val+'text')
+                     input(type=text,value='Question text',id='q'+val+'text',name='q'+val+'text')
                tr
                   td(colspan='2')
                      p='A.'
-                        input(type=text,value='Correct answer text',width='100%',id='q'+val+'correct')
+                        input(type=text,value='Correct answer text',width='100%',id='q'+val+'correct',name='q'+val+'correct')
                      each val, index in {1:'B',2:'C',3:'D'}
                         p=val+"."
-                           input(type=text,value='Answer '+index+' text',id='q'+index+'answer'+val)
+                           input(type=text,value='Answer '+index+' text',id='q'+index+'answer'+val,name='q'+index+'answer'+val)
 
          input(type='button',onclick='extend()',value='Add Question')
          input(type='submit',onclick='check()')
