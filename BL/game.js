@@ -10,13 +10,21 @@ var Game = function(chosenQuizId, res, gameId)
     var currentQuestionIndex = -1;
     var questions = [];
     var connections = [];
+    var shownText;
+
+    this.GetShownText = function()
+    {
+        return shownText;
+    };
 
     mySql.getQuestions(function(err, result)
     {
         questions = result;
         InitStatistic();
-        res.render('teacherGameWindow', {id: gameId, questions: result});
-    }, chosenQuizId);
+
+        shownText = chosenQuizId.toString().split(',')[1] + ": " + gameId.toString().substr(0,4);
+        res.render('teacherGameWindow', {shownText: shownText, id: gameId, questions: result});
+    }, chosenQuizId.toString().split(',')[0]);
 
     this.GetStatistic = function (questionIndex, res)
     {

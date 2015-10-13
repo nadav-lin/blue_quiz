@@ -19,7 +19,7 @@ block content
                             th
                                 div#Games
                                 label #{quiz.quiz_name}
-                                input(type="radio", name="chosenQuizId", value=quiz.quiz_id)
+                                input(type="radio", name="chosenQuizId", value=quiz.quiz_id + "," + quiz.quiz_name)
 
 
 

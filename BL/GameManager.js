@@ -73,3 +73,15 @@ exports.GetGames = function(chosenQuizId)
 {
     return gameDic;
 };
+
+exports.GetGamesShown = function()
+{
+    var gamesShown = [];
+
+    for (var gameKey in gameDic)
+    {
+       gamesShown.push(gameDic[gameKey].GetShownText());
+    }
+
+    return gamesShown;
+}

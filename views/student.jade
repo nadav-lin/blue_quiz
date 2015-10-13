@@ -15,12 +15,12 @@ block content
             h3="משחקים"
          form(name="studentOption", action="/student", method="post")
             table.table.table-hover
-               each key in keys
+               each key,i in keys
                   tr
                      th
                         div#Games
                            input(type="radio", name="chosenGameId", value=key)
-                           label #{key}
+                           label #{shownNames[i]}
             input(type="submit",name="Operation", value="התחל משחק!")
 
 

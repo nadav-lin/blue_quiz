@@ -81,7 +81,7 @@ function placeDiv(){
     inf=$("#q").position();
     t=inf.top;
     l=inf.left;
-    $("#qu").css({top:t+10,left:l+800});
+    $("#qu").css({top:t+10,left:l+650});
 }
 
 /*

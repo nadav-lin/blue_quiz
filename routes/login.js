@@ -21,14 +21,16 @@ router.post('/', function(req, res)
   else if (userName == "student")
   {
     var keys = Object.keys(manager.GetGames());
-
-    res.render('student', {userName: userName, keys: keys});
+    var shownNames = manager.GetGamesShown();
+    console.log(shownNames);
+    res.render('student', {userName: userName, keys: keys, shownNames: shownNames});
   }
   else
   {
     res.render('login', {msg: "Wrong username or password"});
   }
 });
+
 
 module.exports = router;
 
